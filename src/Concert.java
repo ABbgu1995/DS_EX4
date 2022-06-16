@@ -35,12 +35,11 @@ public class Concert {
             Node runner = linked_list_reception.getHead();
             while (runner!=null){
                 search_result = registered.search(runner.getData());
-                if(search_result[0]==1){
-                    sum_of_steps=sum_of_steps+search_result[1];
-                }
+                // Count also people that not exists in the hashtable
+                sum_of_steps=sum_of_steps+search_result[1];
                 runner=runner.getNext();
             }
-            return sum_of_steps/registered.total_nodes;
+            return sum_of_steps/ linked_list_reception.getSize();
 
 
     }
@@ -125,30 +124,41 @@ public class Concert {
             }
 
         }
-        return bubble_sort(ids_allow_enter);
+        // In case of m people registered but n people arrived and m>n
+        // The size of ids_allow_enter is m, and that case if we will only return ids_allow_enter
+        // we will return array which contains m-n zeros, so we filter the zeros and return array with the size of only
+        // people that really arrived.
+        int [] total_entered_id = new int[index];
+        while(index>0){
+            total_entered_id[index-1]=ids_allow_enter[index-1];
+            index--;
+        }
+        return bubble_sort(total_entered_id);
 
     }
     public static int[] seatingArrangement(int[] sortedCrowed, HashClosed registered, int functionNum) {
-        // HashOpen(registered.total_nodes) -> HashOpen(sortedCrowed.length)
+        // Create HashOpen table in the size of the amount of registered people
         HashOpen open_hash_table = new HashOpen(registered.total_nodes);
         int[] statistics = new int[4];
-        int[] steps = new int[sortedCrowed.length];
+        // unavailable seats contains the amount of unavailable seats before seating in HashOpen table for each people in sortedCrowed
+        int[] unavailable_seats = new int[sortedCrowed.length];
         for (int i=0; i<=sortedCrowed.length-1; i++){
-            steps[i]=open_hash_table.insert(sortedCrowed[i],functionNum);
+            unavailable_seats[i]=open_hash_table.insert(sortedCrowed[i],functionNum);
         }
         for (int i=0; i<sortedCrowed.length/2; i++){
-            statistics[0]+=steps[i];
+            statistics[0]+=unavailable_seats[i];
         }
         for (int i=0; i<3*(sortedCrowed.length)/4; i++) {
-            statistics[1] += steps[i];
+            statistics[1] += unavailable_seats[i];
         }
         for (int i=0; i<sortedCrowed.length-(int)Math.pow(sortedCrowed.length,0.5); i++){
-            statistics[2]+=steps[i];
+            statistics[2]+=unavailable_seats[i];
         }
         for (int i=sortedCrowed.length-1; i>=sortedCrowed.length-(int)Math.pow(sortedCrowed.length,0.5); i--){
-            statistics[3]+=steps[i];
+            statistics[3]+=unavailable_seats[i];
         }
         return statistics;
+
     }
 }
 

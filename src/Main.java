@@ -7,10 +7,12 @@ public class Main {
         int avg = Concert.reception_AverageSteps("input2.txt", hash);
         int[] steps1 = Concert.seatingArrangement(arrived, hash, 1);
         int[] steps2 = Concert.seatingArrangement(arrived, hash, 2);
-        int k=13/5;
-        int t= (int)Math.sqrt(8);
 
         //testers
+        // Search tests
+        String[] person = {"387579003","dfd","34","3434"};
+        int[] answer = hash.search(person);
+        System.out.println();
 
         }
     }
