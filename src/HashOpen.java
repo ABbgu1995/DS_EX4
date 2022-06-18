@@ -1,5 +1,5 @@
 /**
- * Class which defines the HashOpen table that operate the hall that contains people that enter the hall
+ * Class which defines the HashOpen table that operate the concert that contains people that enter the hall
  */
 public class HashOpen {
     protected int[] hash_table;
@@ -76,7 +76,6 @@ public class HashOpen {
                 }
                 if (location_by_function - counter == 0) {
                     for (int i = location_by_function + counter; i <= this.hash_table.length - 1; i++) {
-                        // check twice if h-3 if empty but not increase the unavailable_seats is its true
                         if (this.hash_table[i] == 0) {
                             this.hash_table[i] = id;
                             return unavailable_seats;
@@ -103,6 +102,11 @@ public class HashOpen {
             this.hash_table[location_by_function]=id;
         return unavailable_seats;
     }
+
+    /**
+     * calculate the total ids which entered the concert (which represent by the open hash table)
+     * @return int which represent the amount of ids in the open hash table
+     */
     public int getNumberElements(){
         int counter_elements=0;
         for (int i=0; i<=this.hash_table.length-1; i++){
@@ -112,6 +116,10 @@ public class HashOpen {
         return counter_elements;
     }
 
+    /**
+     * return the amount of exists cells (empty or non-empty) within the hashtable
+     * @return int which represent the size of the hashtable
+     */
     public int getSize(){
         return this.hash_table.length;
     }

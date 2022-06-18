@@ -2,7 +2,6 @@
  * Class which defines the HashClose table that operate as the data structure to keep the registered people information
  */
 public class HashClosed {
-    // HashTable for register people (phase1)
     protected LinkedList[] hash_table;
     protected int total_nodes;
 
@@ -31,7 +30,7 @@ public class HashClosed {
 
     /**
      * insert a new person to the end of the linked list
-     * @param person array of string which contains id, firstname, lastname, cardtype
+     * @param person array of string which contains id, firstname, lastname, cardt ype
      */
     public void insert(String[] person) {
         this.hash_table[h1(Integer.parseInt(person[0]))].add(person);

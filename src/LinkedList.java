@@ -15,8 +15,8 @@ public class LinkedList {
     }
 
     /**
-     * Return nothing and add new node to the end of the current linkedlist
-     * @param person contain id, firstname, lastname and cardtype
+     * Return nothing and add new node to the end of the current linked list
+     * @param person contain id, firstname, lastname and card type
      */
     public void add(String[] person){
         Node temp = new Node(person);
@@ -30,12 +30,11 @@ public class LinkedList {
             tail = temp;
         }
         size++;
-
     }
 
     /**
      * return the size (amount of nodes) within the linked list
-     * @return
+     * @return int which represent the size of linked list (amount of nodes)
      */
     public int getSize(){
         return size;
@@ -43,7 +42,7 @@ public class LinkedList {
 
     /**
      * return the pointer to the head of the current linked list
-     * @return
+     * @return the pointer(address) for the head of the linked list
      */
     public Node getHead(){
         return head;
